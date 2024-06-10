@@ -19,3 +19,9 @@ PyPi
 ```bash
 pip install --no-cache-dir pacflypy
 ```
+
+Or Over the Releases
+
+```bash
+https://github.com/PacflyPy/pacflypy/releases
+```

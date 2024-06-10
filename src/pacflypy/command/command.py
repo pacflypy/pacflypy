@@ -148,14 +148,15 @@ class command:
             if self.safe_output:
                 if self.shell:
                     import subprocess
-                    result = subprocess.run(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-                    self.stdout = result.stdout.decode("utf-8")
-                    self.stderr = result.stderr.decode("utf-8")
+                    result = subprocess.run(self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                    self.stdout = result.stdout.strip()
+                    self.stderr = result.stderr.strip()
                 else:
                     import subprocess
-                    result = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-                    self.stdout = result.stdout.decode("utf-8")
-                    self.stderr = result.stderr.decode("utf-8")
+                    result = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                    stdout, stderr = result.communicate()
+                    self.stdout = stdout.strip()
+                    self.stderr = stderr.strip()
             else:
                 if self.shell:
                     import os
