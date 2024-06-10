@@ -51,7 +51,7 @@ deb-termux:
 	pip install $(cdir) --target $(termux-install)
 	rm -rf build dist
 	tar -cJf data.tar.xz ./data
-	rm -rf lib
+	rm -rf data
 	echo 'Package: python-pacflypy' > control
 	echo 'Version: $(version)' >> control
 	echo 'Section: utils' >> control
