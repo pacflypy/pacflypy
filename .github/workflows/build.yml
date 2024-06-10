@@ -1,40 +1,48 @@
-name: Build Package and Upload him
+name: Build and Upload Package
 
 on:
-    workflow_call:
-        inputs:
-            version:
-                description: "Version to build"
-                required: true
-                type: string
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to build"
+        required: true
+        type: string
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v2
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-          - name: Setup SSH
-            run: |
-              sudo apt-get update -qq
-              sudo apt-get install -y openssh-sftp-server gh python3 python3-venv make
-              sudo rm -rf ${HOME}/.ssh
-              mkdir -p ${HOME}/.ssh
-              cat <<EOF > ${HOME}/.pypirc
-              [pypi]
-              username = __token__
-              password = ${{ secrets.PYPI_TOKEN }}
-              EOF
-              echo ${{ secrets.PRIVATE_KEY }} > ${HOME}/.ssh/${{ secrets.PRIVATE_NAME }}
-              chmod 600 ${HOME}/.ssh/${{ secrets.PRIVATE_NAME }}
-              echo ${{ secrets.PUBLIC_KEY }} > ${HOME}/.ssh/${{ secrets.PUBLIC_NAME }}
-              chmod 600 ${HOME}/.ssh/${{ secrets.PUBLIC_NAME }}
-              export GH_TOKEN=${{ secrets.GH_TOKEN }}
-              git remote set-url origin git@github.com:pacflypy/pacflypy.git
-              python3 -m venv .venv
-              source .venv/bin/activate
-              pip install -U pip
-              pip install build twine
-              make 
-              deactivate
+      - name: Setup SSH and dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y openssh-sftp-server gh python3 python3-venv make
+          sudo rm -rf ${HOME}/.ssh
+          mkdir -p ${HOME}/.ssh
+          echo "${{ secrets.PRIVATE_KEY }}" > ${HOME}/.ssh/id_rsa
+          echo "${{ secrets.PUBLIC_KEY }}" > ${HOME}/.ssh/id_rsa.pub
+          chmod 600 ${HOME}/.ssh/id_rsa ${HOME}/.ssh/id_rsa.pub
+          ssh-keyscan github.com >> ${HOME}/.ssh/known_hosts
+          git config --global user.email "pacflypy@outlook.com"
+          git config --global user.name "pacflypy"
+          git remote set-url origin git@github.com:pacflypy/pacflypy.git
+
+      - name: Setup Python environment
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install -U pip
+          pip install build twine
+          echo "[pypi]" > ${HOME}/.pypirc
+          echo "username = __token__" >> ${HOME}/.pypirc
+          echo "password = ${{ secrets.PYPI_TOKEN }}" >> ${HOME}/.pypirc
+
+      - name: Build and upload
+        run: |
+          source .venv/bin/activate
+          make
+          python -m build
+          twine upload dist/*
+          deactivate
