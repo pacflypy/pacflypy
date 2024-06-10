@@ -8,9 +8,9 @@ termux-install=$(cdir)$(termux-prefix)
 debian-package=python3-pacflypy_$(version)_all_debian.deb
 termux-package=python-pacflypy_$(version)_all_termux.deb
 
-.PHONY: all pypi deb-debian deb-termux
+.PHONY: all pypi deb-debian deb-termux upload
 
-all: pypi deb-debian deb-termux
+all: pypi deb-debian deb-termux upload
 
 pypi:
 	cd $(cdir)
@@ -21,6 +21,7 @@ pypi:
 	rm -rf dist src/pacflypy.egg-info*
 
 deb-debian:
+	mkdir -p .artefacts
 	cd $(cdir)
 	mkdir -p $(debian-install)
 	pip install $(cdir) --target $(debian-install)
@@ -41,9 +42,10 @@ deb-debian:
 	echo 2.0 > debian-binary
 	ar rcs $(debian-package) debian-binary control.tar.xz data.tar.xz
 	rm -rf debian-binary control.tar.xz data.tar.xz control
-	gh release upload v.$(version) $(debian-package)
+	mv $(debian-package) .artefacts/
 
 deb-termux:
+	mkdir -p .artefacts
 	cd $(cdir)
 	mkdir -p $(termux-install)
 	pip install $(cdir) --target $(termux-install)
@@ -64,4 +66,10 @@ deb-termux:
 	echo 2.0 > debian-binary
 	ar rcs $(termux-package) debian-binary control.tar.xz data.tar.xz
 	rm -rf debian-binary control.tar.xz data.tar.xz control
-	gh release upload v.$(version) $(termux-package)
+	mv $(termux-package) .artefacts/
+
+upload:
+	cd .artefacts
+	gh release upload v.$(version) *.deb
+	cd $(cdir)
+	rm -rf .artefacts
