@@ -128,6 +128,10 @@ class path:
         path = path.split('/')
         return path
     
+    @staticmethod
+    def create(path: str) -> bool:
+        mkdir(path, exist_ok=True)
+    
 
 class environ:
     """
