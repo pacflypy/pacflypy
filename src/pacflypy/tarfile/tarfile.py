@@ -1,69 +1,67 @@
-import pacflypy.command as command
-import pacflypy.string as string
-import pacflypy.system as system
-import platform
-
-if platform.system().lower() == 'windows':
-    raise Exception('Windows is not supported')
+import tarfile as _tarfile
+import os as _os
 
 class open:
     """
-    Connect you to A Tar Archive
+    A class that provides an interface to work with tar archives.
     """
-    def __init__(self, path: str, mode: str = 'r') -> None:
-        import os
+    def __init__(self, path: str, mode: str = 'r'):
         """
-        Open Tar Archive and Works with Him
-        Modes:
-        'w' - Write
-        'w:xz' - Write XZ
-        'w:gz' - Write GZ
-        'r' - Read
-        'r:xz' - Read XZ
-        'r:gz' - Read GZ
+        Opens a tar archive in the specified mode.
+        Supported modes are: 'r', 'w', 'x' (read, write, exclusive write).
         """
-        name, suffix = os.path.splitext(path)
         self.path = path
         self.mode = mode
-        self.cmd = command.command(programm='tar')
-        if self.mode == 'w':
-            self.cmd.arg('-cf')
-        elif self.mode == 'w:xz':
-            self.cmd.arg('-cJf')
-        elif self.mode == 'w:gz':
-            self.cmd.arg('-cZf')
-        elif self.mode == 'r':
-            self.cmd.arg('-xf')
-        elif self.mode == 'r:xz':
-            self.cmd.arg('-xJf')
-        elif self.mode == 'r:gz':
-            self.cmd.arg('-xZf')
-        self.cmd.arg(self.path)
-        self.cmd.arg(f'--suffix={suffix}')
+        self.tar = None
 
+    def open(self):
+        """
+        Opens the tar archive.
+        """
+        if self.mode in ['r', 'w', 'x']:
+            self.tar = _tarfile.open(self.path, self.mode + '|')
+        else:
+            raise ValueError("Invalid mode: Only 'r', 'w', 'x' are allowed.")
 
-    def add(self, path: str) -> None:
+    def add(self, path: str):
         """
-        Add File to Archive
+        Adds a file or directory to the tar archive.
         """
-        self.cmd.arg(path)
+        if self.tar:
+            self.tar.add(path, arcname=_os.path.basename(path))
+        else:
+            raise Exception("Tar archive is not opened.")
 
-    def remove(self, path: str) -> None:
+    def extract(self, member, path=""):
         """
-        Remove File From Archive
+        Extracts a member from the tar archive.
         """
-        self.cmd.remove(path)
+        if self.tar:
+            self.tar.extract(member, path)
+        else:
+            raise Exception("Tar archive is not opened.")
 
-    def extract(self, path: str) -> None:
+    def list(self):
         """
-        Extract File From Archive
+        Lists all members of the tar archive.
         """
-        self.cmd.arg('-C')
-        self.cmd.arg(path)
+        if self.tar:
+            return self.tar.getmembers()
+        else:
+            raise Exception("Tar archive is not opened.")
 
-    def close(self) -> None:
+    def close(self):
         """
-        Close Tar Archive
+        Closes the tar archive.
         """
-        import sys
-        sys.exit(1)
+        if self.tar:
+            self.tar.close()
+        else:
+            raise Exception("Tar archive is not opened.")
+
+    def __enter__(self):
+        self.open()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
