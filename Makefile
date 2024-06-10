@@ -6,7 +6,7 @@ termux-prefix=/data/data/com.termux/files/usr/lib/python3.11/site-packages
 debian-install=$(cdir)$(debian-prefix)
 termux-install=$(cdir)$(termux-prefix)
 debian-package=python3-pacflypy_$(version)_all_debian.deb
-termux-package=python-pacflypy_$(version)_all_debian.deb
+termux-package=python-pacflypy_$(version)_all_termux.deb
 
 .PHONY: all pypi deb-debian deb-termux
 
