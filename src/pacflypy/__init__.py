@@ -3,6 +3,7 @@ from . import command
 from . import style
 from . import control
 from . import system
+from . import string
 
 __all__ = [
     "exceptions",
@@ -10,4 +11,5 @@ __all__ = [
     "style",
     "control",
     "system",
+    "string",
 ]
