@@ -41,13 +41,14 @@ deb-debian:
 	echo 2.0 > debian-binary
 	ar rcs $(debian-package) debian-binary control.tar.xz data.tar.xz
 	rm -rf debian-binary control.tar.xz data.tar.xz control
+	gh release upload v.$(version) $(debian-package)
 
 deb-termux:
 	cd $(cdir)
 	mkdir -p $(termux-install)
 	pip install $(cdir) --target $(termux-install)
 	rm -rf build dist
-	tar -cJf data.tar.xz ./lib
+	tar -cJf data.tar.xz ./data
 	rm -rf lib
 	echo 'Package: python-pacflypy' > control
 	echo 'Version: $(version)' >> control
@@ -63,3 +64,4 @@ deb-termux:
 	echo 2.0 > debian-binary
 	ar rcs $(termux-package) debian-binary control.tar.xz data.tar.xz
 	rm -rf debian-binary control.tar.xz data.tar.xz control
+	gh release upload v.$(version) $(termux-package)
