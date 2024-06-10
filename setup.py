@@ -4,9 +4,13 @@ def readme():
     with open('README.rst', 'r') as f:
         return f.read()
     
+def version():
+    with open('.version', 'r') as f:
+        return f.read()
+    
 setup(
     name='pacflypy',
-    version='0.2.0',
+    version=version(),
     description='PacflyPy is a Special Python Module',
     long_description=readme(),
     classifiers=[

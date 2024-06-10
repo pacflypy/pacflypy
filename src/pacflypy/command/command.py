@@ -165,5 +165,4 @@ class command:
                 else:
                     import subprocess
                     subprocess.run(self.command)
-    
-    
+        self.executed = True
