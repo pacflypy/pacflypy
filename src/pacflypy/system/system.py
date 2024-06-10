@@ -22,6 +22,16 @@ def mkdir(path: str, exist_ok: bool = False) -> bool:
             status = False
     return status
 
+def run(run_command: str, safe_output: bool = False, shell: bool = False) -> tuple[str, str]:
+    command_parts = run_command.split(' ')
+    cmd = command(programm=command_parts[0], safe_output=safe_output, shell=shell)
+    for i in range(1, len(command_parts)):
+        cmd.arg(command_parts[i])
+    cmd.run()
+    stdout = cmd.stdout()
+    stderr = cmd.stderr()
+    return stdout, stderr
+
 def remove(path: str, dir: bool = False) -> bool:
     if dir:
         cmd = command(programm='rm')
