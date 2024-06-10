@@ -31,7 +31,7 @@ jobs:
 
       - name: Setup Python environment
         env:
-            GH_TOKEN: ${{ secrets.GH_TOKEN}}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           python3 -m venv .venv
           source .venv/bin/activate
@@ -42,6 +42,8 @@ jobs:
           echo "password = ${{ secrets.PYPI_TOKEN }}" >> ${HOME}/.pypirc
 
       - name: Build and upload
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           source .venv/bin/activate
           make
