@@ -1,4 +1,4 @@
-version=$(shell date)
+version=$(shell cat .version)
 
 pypi:
 	pyproject-build
