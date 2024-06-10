@@ -2,6 +2,18 @@ from pacflypy.command import command
 import pacflypy.command as comd
 from pacflypy.exceptions import FileInvalid
 
+def symlink(src: str, des: str = '.') -> bool:
+    """
+    Create An Symbolic
+    """
+    cmd = command(programm='ln')
+    cmd.arg('-sf')
+    cmd.arg(src)
+    cmd.arg(des)
+    cmd.run()
+    status = True
+    return status
+
 def mkdir(path: str, exist_ok: bool = False) -> bool:
     """
     Make a Directory
