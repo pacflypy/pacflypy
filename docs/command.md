@@ -39,3 +39,18 @@ exec_command = cmd.get_command()
 status = cmd.get_executed()
 ```
 
+## Get Output and Error
+
+Normally the Values for stdout and stderr are set as None, but with Following Command can you get the Values.
+We Use the Same Command
+
+```python
+cmd = command(programm='apt', safe_output=True)
+cmd.arg('install')
+cmd.arg('-y')
+cmd.arg('wget')
+cmd.run()
+# This is Generally the Same way but now you can Get the Output and Error
+output = cmd.get_stdout()
+error = cmd.get_stderr()
+```
