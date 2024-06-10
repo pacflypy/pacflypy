@@ -30,6 +30,8 @@ jobs:
           git remote set-url origin git@github.com:pacflypy/pacflypy.git
 
       - name: Setup Python environment
+        env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN}}
         run: |
           python3 -m venv .venv
           source .venv/bin/activate
