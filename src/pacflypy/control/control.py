@@ -1,4 +1,4 @@
-from ..exceptions import ControlFileInvalid
+from pacflypy.exceptions import ControlFileInvalid
 
 _essential = [
     "Package",

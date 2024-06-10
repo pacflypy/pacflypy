@@ -6,7 +6,7 @@ def readme():
     
 setup(
     name='pacflypy',
-    version='0.1.0',
+    version='0.1.1',
     description='PacflyPy is a Special Python Module',
     long_description=readme(),
     classifiers=[

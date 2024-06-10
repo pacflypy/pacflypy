@@ -1,4 +1,4 @@
-from ..exceptions import ColorNotFound, StyleNotFound
+from pacflypy.exceptions import ColorNotFound, StyleNotFound
 class _COLOR:
     """
     This is My Private Class Color

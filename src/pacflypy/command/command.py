@@ -1,4 +1,4 @@
-from ..exceptions import CommandFailedExecute, CommandNotFound, ActionWasExecuted
+from pacflypy.exceptions import CommandFailedExecute, CommandNotFound, ActionWasExecuted
 
 class command:
     """

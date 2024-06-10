@@ -1,6 +1,6 @@
-from ..command import command
-import command as comd
-from ..exceptions import FileInvalid
+from pacflypy.command import command
+import pacflypy.command as comd
+from pacflypy.exceptions import FileInvalid
 
 def mkdir(path: str, exist_ok: bool = False) -> bool:
     if exist_ok:
