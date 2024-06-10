@@ -27,25 +27,30 @@ class _STYLE:
 
 class _dicts:
     color_dict = {
-        0: _COLOR.RESET,
-        1: _COLOR.GREEN,
-        2: _COLOR.RED,
-        3: _COLOR.BLUE,
-        4: _COLOR.YELLOW,
-        5: _COLOR.BLACK,
-        6: _COLOR.CYAN,
-        7: _COLOR.MAGENTA,
-        8: _COLOR.WHITE,
+        "0": _COLOR.RESET,
+        "1": _COLOR.GREEN,
+        "2": _COLOR.RED,
+        "3": _COLOR.BLUE,
+        "4": _COLOR.YELLOW,
+        "5": _COLOR.BLACK,
+        "6": _COLOR.CYAN,
+        "7": _COLOR.MAGENTA,
+        "8": _COLOR.WHITE,
     }
     style_dict = {
-        0: _STYLE.RESET,
-        1: _STYLE.BOLD,
-        2: _STYLE.ITALIC,
-        3: _STYLE.UNDERLINE,
-        4: _STYLE.STRIKE,
-        5: _STYLE.REVERSE,
-        6: _STYLE.HIDDEN,
+        "0": _STYLE.RESET,
+        "1": _STYLE.BOLD,
+        "2": _STYLE.ITALIC,
+        "3": _STYLE.UNDERLINE,
+        "4": _STYLE.STRIKE,
+        "5": _STYLE.REVERSE,
+        "6": _STYLE.HIDDEN,
     }
+
+
+
+
+
 
 class styling:
     """
