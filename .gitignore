@@ -2,4 +2,3 @@ dist
 __pycache__
 .venv
 pacflypy.egg-info*
-build
