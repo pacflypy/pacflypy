@@ -69,7 +69,5 @@ deb-termux:
 	mv $(termux-package) .artefacts/
 
 upload:
-	cd .artefacts
-	gh release upload v.$(version) *.deb
-	cd $(cdir)
-	rm -rf .artefacts
+	gh release upload v.$(version) .artefacts/*
+
