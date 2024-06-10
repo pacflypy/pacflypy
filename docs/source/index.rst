@@ -10,7 +10,9 @@ Welcome to pacflypy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   einleitung
+   installation
+   nutzung
 
 Indices and tables
 ==================
