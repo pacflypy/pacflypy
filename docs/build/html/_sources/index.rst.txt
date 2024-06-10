@@ -11,8 +11,10 @@ Welcome to pacflypy's documentation!
    :caption: Contents:
 
    einleitung
-   installation
-   nutzung
+   installieren
+   klassen
+   funktionen
+   mehr
 
 Indices and tables
 ==================
