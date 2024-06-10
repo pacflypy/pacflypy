@@ -28,8 +28,8 @@ def run(run_command: str, safe_output: bool = False, shell: bool = False) -> tup
     for i in range(1, len(command_parts)):
         cmd.arg(command_parts[i])
     cmd.run()
-    stdout = cmd.stdout()
-    stderr = cmd.stderr()
+    stdout = cmd.get_stdout()
+    stderr = cmd.get_stderr()
     return stdout, stderr
 
 def remove(path: str, dir: bool = False) -> bool:
@@ -56,8 +56,8 @@ class path:
             cmd = command(programm='dir', safe_output=True)
             cmd.arg(path)
             cmd.run()
-            stdout = cmd.stdout()
-            stderr = cmd.stderr()
+            stdout = cmd.get_stdout()
+            stderr = cmd.get_stderr()
             if stdout == '' and stderr == '':
                 return False
             else:
@@ -66,8 +66,8 @@ class path:
             cmd = command(programm='ls', safe_output=True)
             cmd.arg(path)
             cmd.run()
-            stdout = cmd.stdout()
-            stderr = cmd.stderr()
+            stdout = cmd.get_stdout()
+            stderr = cmd.get_stderr()
             if stdout == '' and stderr == '':
                 return False
             else:
@@ -99,8 +99,8 @@ class environ:
             cmd = command(programm='set', safe_output=True)
             cmd.arg(key)
             cmd.run()
-            stdout = cmd.stdout()
-            stderr = cmd.stderr()
+            stdout = cmd.get_stdout()
+            stderr = cmd.get_stderr()
             if stdout == '' and stderr == '':
                 return ''
             else:
@@ -109,8 +109,8 @@ class environ:
             cmd = command(programm='printenv', safe_output=True)
             cmd.arg(key)
             cmd.run()
-            stdout = cmd.stdout()
-            stderr = cmd.stderr()
+            stdout = cmd.get_stdout()
+            stderr = cmd.get_stderr()
             if stdout == '' and stderr == '':
                 return ''
             else:

@@ -149,13 +149,13 @@ class command:
                 if self.shell:
                     import subprocess
                     result = subprocess.run(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-                    self.stdout = result.stdout
-                    self.stderr = result.stderr
+                    self.stdout = result.stdout.decode("utf-8")
+                    self.stderr = result.stderr.decode("utf-8")
                 else:
                     import subprocess
                     result = subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-                    self.stdout = result.stdout
-                    self.stderr = result.stderr
+                    self.stdout = result.stdout.decode("utf-8")
+                    self.stderr = result.stderr.decode("utf-8")
             else:
                 if self.shell:
                     import os
