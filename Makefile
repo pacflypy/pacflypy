@@ -70,4 +70,5 @@ deb-termux:
 
 upload:
 	gh release upload v.$(version) .artefacts/*
+	rm -rf .artefacts
 
