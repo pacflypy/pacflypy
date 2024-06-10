@@ -10,7 +10,7 @@ def version():
     
 setup(
     name='pacflypy',
-    version=version(),
+    version='0.2.1',
     description='PacflyPy is a Special Python Module',
     long_description=readme(),
     classifiers=[
