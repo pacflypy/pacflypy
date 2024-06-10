@@ -5,7 +5,7 @@ def readme():
         return f.read()
     
 def version():
-    with open('.version', 'r') as f:
+    with open('VERSION', 'r') as f:
         return f.read()
     
 setup(
