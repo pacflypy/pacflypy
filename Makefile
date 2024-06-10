@@ -72,3 +72,11 @@ upload:
 	gh release upload v.$(version) .artefacts/*
 	rm -rf .artefacts
 
+deploy:
+	rm -rf $(cdir)/docs/html
+	cp -rf $(cdir)/content/build $(cdir)/docs
+
+git:
+	git add .
+	git commit -m "update"
+	git push origin master
