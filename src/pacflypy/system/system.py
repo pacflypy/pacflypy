@@ -3,6 +3,9 @@ import pacflypy.command as comd
 from pacflypy.exceptions import FileInvalid
 
 def mkdir(path: str, exist_ok: bool = False) -> bool:
+    """
+    Make a Directory
+    """
     if exist_ok:
         try:
             cmd = command(programm='mkdir')
@@ -23,6 +26,9 @@ def mkdir(path: str, exist_ok: bool = False) -> bool:
     return status
 
 def run(run_command: str, safe_output: bool = False, shell: bool = False) -> tuple[str, str]:
+    """
+    Run a Command
+    """
     command_parts = run_command.split(' ')
     cmd = command(programm=command_parts[0], safe_output=safe_output, shell=shell)
     for i in range(1, len(command_parts)):
@@ -33,6 +39,9 @@ def run(run_command: str, safe_output: bool = False, shell: bool = False) -> tup
     return stdout, stderr
 
 def remove(path: str, dir: bool = False) -> bool:
+    """
+    Remove a File or Directory
+    """
     if dir:
         cmd = command(programm='rm')
         cmd.arg('-rf')
@@ -44,6 +53,26 @@ def remove(path: str, dir: bool = False) -> bool:
         cmd.arg(path)
         cmd.run()
         status = True
+    return status
+
+def copy(src: str, dest: str, dir: bool = False):
+    """
+    Copy a File or Directory
+    """
+    if dir:
+        cmd = command(programm='cp')
+        cmd.arg('-rf')
+        cmd.arg(src)
+        cmd.arg(dest)
+        cmd.run()
+        status = True
+    else:
+        cmd = command(programm='cp')
+        cmd.arg(src)
+        cmd.arg(dest)
+        cmd.run()
+        status = True
+    return status
 
 class path:
     """
