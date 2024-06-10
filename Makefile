@@ -1,4 +1,4 @@
-version=$(shell cat .version)
+version=$(shell cat VERSION)
 cdir=$(shell pwd)
 size=$(shell du -s $(cdir)/src | cut -f1)
 debian-prefix=/lib/python3/dist-packages
