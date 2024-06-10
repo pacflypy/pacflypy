@@ -30,8 +30,8 @@ cmd = command(programm='dpkg', safe_output=True, shell=False) # Initialize the C
 cmd.arg('--print-architecture')
 print(cmd.get_command()) # This will Show you the Full Command as String also, 'dpkg --print-architecture'
 cmd.run() # More need you not, this will Execute the Command and Safe the Output and now we get him
-stdout = cmd.stdout() # Get the stdout
-stderr = cmd.stderr() # Get the stderr
+stdout = cmd.get_stdout() # Get the stdout
+stderr = cmd.get_stderr() # Get the stderr
 print('The Architecture is: ' + stdout)
 ```
 

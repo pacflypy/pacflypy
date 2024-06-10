@@ -55,7 +55,7 @@ class command:
         """
         return self.executed
     
-    def stdout(self):
+    def get_stdout(self):
         """
         Get the Stdout from the Command
         Returns:
@@ -63,7 +63,7 @@ class command:
         """
         return self.stdout
     
-    def stderr(self):
+    def get_stderr(self):
         """
         Get the Stderr from the Command
         Returns:
@@ -71,7 +71,7 @@ class command:
         """
         return self.stderr
     
-    def returncode(self):
+    def get_returncode(self):
         """
         Get the Returncode from the Command
         Returns:
