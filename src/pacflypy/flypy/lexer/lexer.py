@@ -44,12 +44,13 @@ class lexer:
     """
     Class for Lexing the flypy Extension Language
     """
-    def __init__(self, content: str) -> str:
+    def __init__(self, content: str) -> dict:
         """
         Init the Lexer with Given Content
         """
         self.content = content
         token = self._tokenize(content=self.content)
+        return token
 
     def _tokenize(self, content: str) -> dict:
         """
@@ -59,3 +60,7 @@ class lexer:
         token = {}
 
         # Werte content aus und Parse diese zu Token
+        for token_type, regex in _TOKEN.TOKEN.items():
+            matches = re.finditer(regex, content)
+            token[token_type] = [match.group(0) for match in matches]
+        return token
