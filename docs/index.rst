@@ -9,6 +9,13 @@ Welcome to pacflypy's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   
+   usage/installation
+   usage/import
+   usage/classes
+   usage/functions
+   usage/samples
+
 
 
 
