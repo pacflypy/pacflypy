@@ -4,7 +4,8 @@ from . import style
 from . import control
 from . import system
 from . import string
-from .flytar import flytar
+from . import freetime
+from . import flytar
 
 __all__ = [
     "exceptions",
@@ -14,4 +15,5 @@ __all__ = [
     "system",
     "string",
     "flytar",
+    "freetime"
 ]
