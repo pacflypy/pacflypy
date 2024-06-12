@@ -72,7 +72,7 @@ For Ubuntu and Debian have i Under Releases a Debian Installation Package, you c
 
 .. code-block:: bash
 
-    version='0.2.5'
+    version='0.2.6'
     wget https://github.com/pacflypy/pacflypy/releases/download/v.${version}/python3-pacflypy_${version}_all_debian.deb
     if ! command -v sudo &> /dev/null; then
         dpkg -i python3-pacflypy_${version}_all_debian.deb
