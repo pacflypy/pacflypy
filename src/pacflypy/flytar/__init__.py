@@ -1,3 +1,3 @@
-from .flytar import Instance, add, remove, extract
+from .flytar import add, remove, extract, create_meta, get_current_time, SupportNotAvailable
 
-__all__ = ['Instance', 'add', 'remove', 'extract']
+__all__ = ['add', 'remove', 'extract', 'create_meta', 'get_current_time', 'SupportNotAvailable']
