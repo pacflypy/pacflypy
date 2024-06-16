@@ -3,8 +3,7 @@ from . import command
 from . import style
 from . import control
 from . import system
-from . import string
-from . import freetime
+from . import pacflypy
 from . import flytar
 
 __all__ = [
@@ -13,7 +12,6 @@ __all__ = [
     "style",
     "control",
     "system",
-    "string",
     "flytar",
-    "freetime"
+    "pacflypy"
 ]
